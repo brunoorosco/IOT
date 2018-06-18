@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "WIFI_EDUC_126";
-const char* password = "educ126634#";
+const char* ssid = "WIFI_EDUC_126"; //endereço do wifi
+const char* password = "educ126634#"; //senha da rede escola
 
 // Create an instance of the server
 // specify the port to listen on as an argument
