@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 
-const char* ssid = "WIFI_EDUC_126"; //endereço do wifi
-const char* password = "educ126634#"; //senha da rede escola
+const char *ssid = "WIFI_EDUC_126"; //endereço do wifi
+const char *password = "educ126634#"; //senha da rede escola
 
 // Create an instance of the server
 // specify the port to listen on as an argument
@@ -22,7 +22,7 @@ void setup() {
   // Connect to WiFi network
   Serial.println();
   Serial.println();
-  Serial.print("Connecting to ");
+  Serial.print("Conectando rede: ");
   Serial.println(ssid);
 
   WiFi.begin(ssid, password);
@@ -32,11 +32,16 @@ void setup() {
     Serial.print(".");
   }
   Serial.println("");
+<<<<<<< HEAD:teste_LED/teste_LED.ino
   Serial.println("WiFi connected");
 
+=======
+  Serial.println("WiFi Conectado");
+  
+>>>>>>> 30933a10efb97fe5647573481684f9dc13630b52:teste_LED/teste_LED.ino
   // Start the server
   server.begin();
-  Serial.println("Server started");
+  Serial.print("Servidor Iniciado: ");
 
   // Print the IP address
   Serial.println(WiFi.localIP());
@@ -49,7 +54,7 @@ void loop() {
   }
 
   // Wait until the client sends some data
-  Serial.println("new client");
+  Serial.println("Novo Cliente");
   while(!client.available()){
     delay(1);
   }
@@ -63,31 +68,31 @@ void loop() {
   int val;
   String m;
   if (req.indexOf("/D1/0") != -1){
-    m = "D1 is Low";
+    m = "D1 - OFF";
     digitalWrite(D1, 0);
   }
   else if (req.indexOf("/D1/1") != -1){
-    m = "D1 is High";
+    m = "D1 - ON";
     digitalWrite(D1, 1);
   }
   else if (req.indexOf("/D2/0") != -1){
-    m = "D2 is Low";
+    m = "D2 - OFF";
     digitalWrite(D2, 0);
   }
   else if (req.indexOf("/D2/1") != -1){
-    m = "D2 is High";
+    m = "D2 - ON";
     digitalWrite(D2, 1);
   }
   else if (req.indexOf("/D3/0") != -1){
-    m = "D3 is Low";
+    m = "D3 - OFF";
     digitalWrite(D3, 0);
   }
   else if (req.indexOf("/D3/1") != -1){
-    m = "D3 is High";
+    m = "D3 - ON";
     digitalWrite(D3, 1);
   }
   else {
-    Serial.println("invalid request");
+    Serial.println("requesicao invalida");
     client.stop();
     return;
   }
@@ -96,14 +101,14 @@ void loop() {
 
   client.flush();
 
-  // Prepare the response
+  // prepara resposta
   String s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<head><meta http-equiv=\"Access-Control-Allow-Origin\" content=\"*\"></head>\n<html>\r\n" +m;
   s += "</html>\n";
 
-  // Send the response to the client
+  // envia responta para o cliente
   client.print(s);
   delay(1);
-  Serial.println("Client disonnected");
+  Serial.println("Cliente Desconectado");
 
   // The client will actually be disconnected
   // when the function returns and 'client' object is detroyed
